@@ -1,0 +1,6 @@
+custom_host = "attendance.c4fhql9b7yel.us-west-2.rds.amazonaws.com"
+custom_user = "admin"
+custom_pass = "password"
+custom_db = "attendance"
+custom_bucket = "addstudent1"
+custom_region = " us-west-2"
