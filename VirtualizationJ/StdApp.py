@@ -6,15 +6,15 @@ from config import *
 
 app = Flask(__name__)
 
-bucket = custombucket
-region = customregion
+bucket = "addstudent1"
+region = "us-west-2"
 
 db_conn = connections.Connection(
-    host=customhost,
+    host="attendance.c4fhql9b7yel.us-west-2.rds.amazonaws.com",
     port=3306,
-    user=customuser,
-    password=custompass,
-    db=customdb
+    user="admin",
+    password="password",
+    db="attendance"
 
 )
 output = {}
@@ -56,8 +56,8 @@ def AddStd():
 
         try:
             print("Data inserted in MySQL RDS... uploading image to S3...")
-            s3.Bucket(custombucket).put_object(Key=emp_image_file_name_in_s3)
-            bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+            s3.Bucket(bucket).put_object(Key=emp_image_file_name_in_s3)
+            bucket_location = boto3.client('s3').get_bucket_location(Bucket=bucket)
             s3_location = (bucket_location['LocationConstraint'])
 
             if s3_location is None:
@@ -67,7 +67,7 @@ def AddStd():
 
             object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
                 s3_location,
-                custombucket,
+                bucket,
                 emp_image_file_name_in_s3)
 
         except Exception as e:
